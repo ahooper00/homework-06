@@ -17,12 +17,38 @@
                 <input id="search-input" class="search-input w-50" type="text" placeholder="Search a city">
                 <button class="btn btn-info">Search</button>
             </form>
-            <a href="./index.html" class="btn btn-block btn-danger">&larr; Go back</a>
+            <a href="./index.html" class="btn btn-danger">&larr; Go back</a>
         </div>
 
-        <div class="col-12 col-md-9 p-3 text-primary">
-            <h2>Showing results for <span id="result-text"></span></h2>
-            <div id="result-content"></div>
+        <div class="results-container col-12 col-md-9 p-3 text-primary">
+            <h2>Showing results for <i><span id="result-text"></span></i></h2>
+            <div class="current-weather">
+                <div class="info-text">
+                    <p>Current Temperature is </p>
+                    <div class="temperature"></div>
+                </div>
+                </br>
+                <div class="info-text">
+                    <p>Feels like </p>
+                    <div class="feels-like"></div>
+                </div>
+                </br>
+                <div class="info-text">
+                    <p>Description: </p>
+                    <div class="sky"></div>
+                </div>
+                </br>
+                <div class="info-text">
+                    <p>Wind speeds of </p>
+                    <div class="wind"></div>
+                </div>
+            </div>
+
+            <div class="forecast-weather">
+                <div class="day-one">
+                    
+                </div>
+            </div>
         </div>
     </div>
 
