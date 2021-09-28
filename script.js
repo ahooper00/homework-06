@@ -9,7 +9,7 @@ function handleFormSubmit(event) {
         console.error("You need a search input value!");
         return;
     }
-    const queryString = './search-results.html?=' + searchInput;
+    const queryString = './search-results.html?q=' + searchInput;
 
     location.assign(queryString)
 }
