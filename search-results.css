@@ -2,3 +2,31 @@
     border: 2px solid teal;
 }
 
+h2 {
+    display: block;
+}
+
+/* .results-container {
+    display: flex;
+} */
+
+.current-weather {
+    /* border: 2px burlywood solid; */
+    color: teal;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-text {
+    display: flex;
+    flex: 1;
+}
+
+span {
+    font-weight: bold;
+}
+
+.current-icon {
+    width: 100px;
+    height: auto;
+}

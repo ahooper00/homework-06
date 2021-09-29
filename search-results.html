@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <title>Results - Weather Dashboard</title>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./search-results.css" />
 </head>
 
 <body>
-    <div class="container align-start">
+    <div class="container align-start" id="container">
         <div class="bg-light p-5">
             <h1 class="text-primary text-center">Weather search</h1>
             <form id="search-form" class="form-input text-center">
@@ -20,38 +20,44 @@
             <a href="./index.html" class="btn btn-danger">&larr; Go back</a>
         </div>
 
-        <div class="results-container col-12 col-md-9 p-3 text-primary">
+        <div class="results-container p-3">
             <h2>Showing results for <i><span id="result-text"></span></i></h2>
+            <p class="current-date"></p>
             <div class="current-weather">
                 <div class="info-text">
-                    <p>Current Temperature is </p>
-                    <div class="temperature"></div>
+                    <p>Current Temperature is <span class="temperature"></span> degrees Celsius</p>
                 </div>
-                </br>
                 <div class="info-text">
-                    <p>Feels like </p>
-                    <div class="feels-like"></div>
+                    <p>Feels like <span class="feels-like"></span> degrees Celsius</p>
                 </div>
-                </br>
                 <div class="info-text">
-                    <p>Description: </p>
-                    <div class="sky"></div>
+                    <p>Description: <span class="sky"></span></p>
                 </div>
-                </br>
                 <div class="info-text">
-                    <p>Wind speeds of </p>
-                    <div class="wind"></div>
+                    <p>Wind speeds of <span class="wind"></span></p>
                 </div>
+                <div class="info-text">
+                    <p>Current humidity of <span class="humidity"></span></p>
+                </div>
+                <img class="current-icon"></img>
             </div>
+
+            </br>
 
             <div class="forecast-weather">
                 <div class="day-one">
-                    
+                    <div class="date"></div>
+                    <!-- <img class="icon"></img> -->
+                    <div class="temps"></div>
+                    <div class="cloud"></div>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="./search-results.js"></script>
 </body>
 
