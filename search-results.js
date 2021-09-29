@@ -12,20 +12,19 @@ function getCityName() {
     const searchParams = document.location.search;
 
     const query = searchParams.replace("?q=", "");
-    console.log(query);
+    // console.log(query);
 
     return query;
 };
 
-function showResults(resultsObj) {
-    console.log(resultsObj);
+// function showResults(resultsObj) {
 
-    const resultBody = document.createElement("div");
-    resultBody.classList.add("result-body");
-    resultTextEl.append(resultBody);
+//     const resultBody = document.createElement("div");
+//     resultBody.classList.add("result-body");
+//     resultTextEl.append(resultBody);
 
-}
-showResults();
+// }
+// showResults();
 
 document.querySelector("#result-text").textContent = getCityName();
 
@@ -63,7 +62,6 @@ function printForecast() {
     const cityName = getCityName();
     const apiKeyForecast = "e8291b7ef147e668681625dd1ef4d72e";
     const url = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKeyForecast}`;
-    // console.log(url);
 
     fetch(url)
         .then(function (response) {
@@ -81,6 +79,7 @@ function printForecast() {
                 let dateDiv = document.createElement("div")
                 const date = new Date(weather.dt*1000);
                 dateDiv.innerHTML = date.toDateString();
+                dateDiv.className = "weather-card";
                 document.querySelector(".forecast-weather").appendChild(dateDiv);
 
                 let minTempText = document.createElement("p")
@@ -100,27 +99,58 @@ function printForecast() {
                 maxTempText.appendChild(maxTempDiv);
 
                 let windText = document.createElement("p")
-                windText.innerHTML
+                windText.innerHTML = "Wind speeds up to ";
+                dateDiv.appendChild(windText);
 
-                let windDiv = document.createElement("div")
+                let windDiv = document.createElement("span")
                 windDiv.innerHTML = weather.wind.speed;
-                maxTempDiv.appendChild(windDiv)
+                windText.appendChild(windDiv);
 
-                let humidityDiv = document.createElement("div")
+                let humidityText = document.createElement("p")
+                humidityText.innerHTML = "Humidity around ";
+                dateDiv.appendChild(humidityText)
+
+                let humidityDiv = document.createElement("span")
                 humidityDiv.innerHTML = weather.main.humidity;
-                maxTempDiv.appendChild(humidityDiv)
+                humidityText.appendChild(humidityDiv)
 
                 let iconDiv = document.createElement("img")
                 let icon = weather.weather[0].icon
                 let iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
                 iconDiv.src = iconUrl;
-                humidityDiv.appendChild(iconDiv);
+                dateDiv.appendChild(iconDiv);
             }
         })
 }
 
 printForecast();
 printCurrentWeather();
+
+// const pastSearches = [];
+// if (localStorage["pastSearches"]) {
+//     pastSearches = JSON.parse(localStorage["pastSearches"]);
+// }
+
+// if (pastSearches.indexOf(search)) {
+//     pastSearches.unshift(search);
+//     if(pastSearches.length > 5) {
+//         pastSearches.pop();
+//     }
+//     localStorage["pastSearches"] = JSON.stringify(pastSearches);
+// }
+
+// function getPastSearches() {
+//     if (pastSearches.length) {
+//         let html = pastSearchesTemplate({search:pastSearches});
+//         $("#pastSearches").html(html);
+//     }
+// }
+
+// $(document).on("click", ".pastSearchLink", function(e) {
+//     e.preventDefault();
+//     let search = $(this).text();
+//     doSearch(search);
+// });
 
 function kelvinToCelsius(kelvin) {
     return Math.round(kelvin - 273.15);
@@ -142,14 +172,3 @@ function handleFormSubmit(event) {
 
 searchFormEl.addEventListener('submit', handleFormSubmit);
 
-// async function getData() {
-//     const cityName = "sydney";
-//     const apiKey = "e8291b7ef147e668681625dd1ef4d72e";
-//     const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`
-//     const response = await fetch(url);
-//     const weatherData = await response.json();
-//     console.log(weatherData)
-//     console.log(`Hi! In ${cityName} it's a lovely ${weatherData.main.temp} degrees Kelvin or some shit 🥶`);
-// }
-
-// getData();

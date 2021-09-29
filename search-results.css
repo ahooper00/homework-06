@@ -6,15 +6,16 @@ h2 {
     display: block;
 }
 
-/* .results-container {
-    display: flex;
-} */
+.results-container,
+.current-weather {
+    background-color: rgb(225, 241, 247);
+} 
 
 .current-weather {
-    /* border: 2px burlywood solid; */
     color: teal;
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 
 .info-text {
@@ -29,4 +30,14 @@ span {
 .current-icon {
     width: 100px;
     height: auto;
+}
+
+.weather-card {
+    border: 2px lightgrey solid;
+    padding: 20px;
+    background-color: linen;
+}
+
+img {
+    float: inline-end;
 }
