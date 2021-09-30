@@ -25,7 +25,7 @@ document.querySelector("#result-text").textContent = getCityName();
 function printCurrentWeather() {
     const cityName = getCityName();
     const apiKey = "e8291b7ef147e668681625dd1ef4d72e";
-    const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
     console.log(url);
 
     // Fetches the information from the API
@@ -59,7 +59,7 @@ function printCurrentWeather() {
 function printForecast() {
     const cityName = getCityName();
     const apiKeyForecast = "e8291b7ef147e668681625dd1ef4d72e";
-    const url = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKeyForecast}`;
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKeyForecast}`;
 
     fetch(url)
         .then(function (response) {
