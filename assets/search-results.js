@@ -2,38 +2,33 @@ const resultTextEl = document.querySelector("#result-text");
 const resultContentEl = document.querySelector("#result-content");
 const searchFormEl = document.querySelector("#search-form");
 
+// Presents the current date when a city is searched
 function currentDay() {
     let currentTimeAndDate = moment();
     $(".current-date").text(currentTimeAndDate.format("dddd, MMMM Do, YYYY"));
 };
 currentDay();
 
+// The parameters are defined by the city name that has been searched
 function getCityName() {
     const searchParams = document.location.search;
 
     const query = searchParams.replace("?q=", "");
-    // console.log(query);
 
     return query;
 };
 
-// function showResults(resultsObj) {
-
-//     const resultBody = document.createElement("div");
-//     resultBody.classList.add("result-body");
-//     resultTextEl.append(resultBody);
-
-// }
-// showResults();
-
+// Prints the city name is the correct html location
 document.querySelector("#result-text").textContent = getCityName();
 
+// Define the required the url and API
 function printCurrentWeather() {
     const cityName = getCityName();
     const apiKey = "e8291b7ef147e668681625dd1ef4d72e";
     const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
     console.log(url);
 
+    // Fetches the information from the API
     fetch(url)
         .then(function (response) {
             if (!response.ok) {
@@ -41,6 +36,7 @@ function printCurrentWeather() {
             }
             return response.json();
         })
+        // After the fetch, the required weather information is called and inserted into the appropriate html sections
         .then(function (weatherData) {
             console.log(weatherData);
             document.querySelector(".temperature").textContent = kelvinToCelsius(weatherData.main.temp);
@@ -49,6 +45,7 @@ function printCurrentWeather() {
             document.querySelector(".wind").textContent = weatherData.wind.speed;
             document.querySelector(".humidity").textContent = weatherData.main.humidity;
 
+            // The icons are retrieved using a different url
             let icon = weatherData.weather[0].icon
             let iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
             document.querySelector(".current-icon").src = iconUrl;
@@ -58,6 +55,7 @@ function printCurrentWeather() {
         })
 }
 
+// This function calls and prints the forecast weather information
 function printForecast() {
     const cityName = getCityName();
     const apiKeyForecast = "e8291b7ef147e668681625dd1ef4d72e";
@@ -70,12 +68,15 @@ function printForecast() {
             }
             return response.json();
         })
+        
+        // For this function, the html parts are created using javascript, as a for loop has been used to go through each day
         .then(function (forecastData) {
             console.log(forecastData);
             for (let i = 0; i < 4; i++) {
                 const weatherForecastIndex = 5 + (i * 8);
                 const weather = forecastData.list[weatherForecastIndex];
 
+                // The date fetched is in unix, and so here it is converted to proper date notation
                 let dateDiv = document.createElement("div")
                 const date = new Date(weather.dt*1000);
                 dateDiv.innerHTML = date.toDateString();
@@ -114,6 +115,7 @@ function printForecast() {
                 humidityDiv.innerHTML = weather.main.humidity;
                 humidityText.appendChild(humidityDiv)
 
+                // Again the icons are called
                 let iconDiv = document.createElement("img")
                 let icon = weather.weather[0].icon
                 let iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
@@ -123,39 +125,16 @@ function printForecast() {
         })
 }
 
+// Calls the functions that fetches and prints the weather information
 printForecast();
 printCurrentWeather();
 
-// const pastSearches = [];
-// if (localStorage["pastSearches"]) {
-//     pastSearches = JSON.parse(localStorage["pastSearches"]);
-// }
-
-// if (pastSearches.indexOf(search)) {
-//     pastSearches.unshift(search);
-//     if(pastSearches.length > 5) {
-//         pastSearches.pop();
-//     }
-//     localStorage["pastSearches"] = JSON.stringify(pastSearches);
-// }
-
-// function getPastSearches() {
-//     if (pastSearches.length) {
-//         let html = pastSearchesTemplate({search:pastSearches});
-//         $("#pastSearches").html(html);
-//     }
-// }
-
-// $(document).on("click", ".pastSearchLink", function(e) {
-//     e.preventDefault();
-//     let search = $(this).text();
-//     doSearch(search);
-// });
-
+// Converts the temperature from kelvin (information fetched from API) to Celsius
 function kelvinToCelsius(kelvin) {
     return Math.round(kelvin - 273.15);
 }
 
+// Function allows cities to be searched one after the other
 function handleFormSubmit(event) {
     event.preventDefault();
 
@@ -171,4 +150,3 @@ function handleFormSubmit(event) {
 }
 
 searchFormEl.addEventListener('submit', handleFormSubmit);
-
